@@ -111,7 +111,7 @@ resource "aws_instance" "web" {
     #user = "ubuntu"
     host = "${self.public_ip}"
     # The connection will use the local SSH agent for authentication.
-    type        = ssh
+    type        = "ssh"
     private_key = "harin-private"
     timeout     = "2m"
   }
