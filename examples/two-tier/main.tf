@@ -107,7 +107,8 @@ resource "aws_instance" "web" {
   # communicate with the resource (instance)
   connection {
     # The default username for our AMI
-    user = "ubuntu"
+    user = "centos"
+    #user = "ubuntu"
     host = "${self.public_ip}"
     # The connection will use the local SSH agent for authentication.
   }
@@ -134,9 +135,13 @@ resource "aws_instance" "web" {
   # this should be on port 80
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get -y update",
-      "sudo apt-get -y install nginx",
-      "sudo service nginx start",
+      #"sudo apt-get -y update",
+      "sudo yum update -y",
+      "sudo yum install -y epel-release",
+      "sudo yum install -y nginx",
+      #"sudo apt-get -y install nginx",
+      "sudo systemctl start nginx",
+      #"sudo service nginx start",
     ]
   }
 }
