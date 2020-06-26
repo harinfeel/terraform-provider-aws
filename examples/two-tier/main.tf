@@ -105,18 +105,8 @@ resource "aws_key_pair" "auth" {
 resource "aws_instance" "web" {
   # The connection block tells our provisioner how to
   # communicate with the resource (instance)
-  connection {
-    # The default username for our AMI
-    user = "centos"
-    #user = "ubuntu"
-    host = "${self.public_ip}"
-    # The connection will use the local SSH agent for authentication.
-    type        = "ssh"
-    private_key = var.harin-private
-    timeout     = "2m"
-  }
 
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
 
   # Lookup the correct AMI based on the region
   # we specified
@@ -136,15 +126,4 @@ resource "aws_instance" "web" {
   # We run a remote provisioner on the instance after creating it.
   # In this case, we just install nginx and start it. By default,
   # this should be on port 80
-  provisioner "remote-exec" {
-    inline = [
-      #"sudo apt-get -y update",
-      "sudo yum update -y",
-      "sudo yum install -y epel-release",
-      "sudo yum install -y nginx",
-      #"sudo apt-get -y install nginx",
-      "sudo systemctl start nginx",
-      #"sudo service nginx start",
-    ]
-  }
 }
