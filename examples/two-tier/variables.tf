@@ -20,7 +20,7 @@ variable "aws_region" {
 # Centos 7
 variable "aws_amis" {
   default = {
-    us-east-1 = "ami-06e83aceba2cb0907"
+    #us-east-1 = "ami-06e83aceba2cb0907"
     ap-northeast-2 = "ami-06e83aceba2cb0907"
   }
 }
